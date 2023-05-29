@@ -10,7 +10,7 @@ public class CardPile : MonoBehaviour
 
     public Card removeCard(Card cardToRemove) {
         cards.Remove(cardToRemove);
-        return cardToRemove;
+        return cardToRemove; //anime titties
     }
 
     public void addCard(Card cardToAdd) {
