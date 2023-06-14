@@ -9,6 +9,8 @@ public class SelectionManager : MonoBehaviour
     private Card selectedCardCardClass; 
     private NPC selectedNPC;
     public GameObject discard;
+    public DiscardPile discardPile;
+    public GameObject hand;
     public PlayerHand playerHand;
 
     public void debugDiscard() {
@@ -30,13 +32,25 @@ public class SelectionManager : MonoBehaviour
         Debug.Log("Selected card attribute = " + selectedCard);
     }
     public void useCard(NPC target) { //applies card to NPC, sends card from hand --> discard pile
-        discard = GameObject.Find("discardPile");
+        if (!discard) {
+            discard = GameObject.Find("discardPile");
+        }
+        if (!hand) {
+            hand = GameObject.Find("playerHandArea");
+        }
         selectedCardCardClass = selectedCard.GetComponent<Card>(); //this gets Card script features from gameobject
         selectedCardCardClass.cardEffect(target);
-        DiscardPile discardPile = discard.GetComponent<DiscardPile>(); 
-        discardPile.addCard(selectedCard.gameObject); //FIXME: at runtime the discard field is null for some reason????
+        if (!discardPile) {
+            discardPile = discard.GetComponent<DiscardPile>(); 
+        }
+        discardPile.addCard(selectedCard.gameObject);
+        if (!playerHand) {
+            playerHand = hand.GetComponent<PlayerHand>();
+        }
+        playerHand.removeCard(selectedCard);
         selectedCard.SetActive(false);
-        //playerHand.removeCard(selectedCard);
+        selectedCard.transform.SetParent(null, false);
+        selectedCard.transform.position = new Vector2(-100, -100);
         selectedCard = null;
         hasCard = false;
     }

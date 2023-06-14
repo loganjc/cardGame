@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    [SerializeField] private int HP = 10;
+    public int HP = 10;
     private int maxHP;
     private int handLimit;
     private int defense;
+    public hpDisplay hpDisplayUI;
     public SelectionManager selectionManager;
 
     public void OnMouseDown() {
@@ -21,6 +22,7 @@ public class NPC : MonoBehaviour
     public void takeDamage(int damage) {
         Debug.Log("NPC took " + damage + " damage");
         HP -= damage;
+        hpDisplayUI.updateHPcounter(this.HP);
         Debug.Log("NPC has " + HP + " HP");
         if (HP <= 0){
             Destroy(this);

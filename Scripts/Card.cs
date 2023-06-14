@@ -28,4 +28,8 @@ public class Card : MonoBehaviour
         selectedNPC.takeDamage(1);
         //card effects
     }
+
+    public int Compare(Card otherCard) {
+        return this.shuffleNumber.CompareTo(otherCard.shuffleNumber);
+    }
 }

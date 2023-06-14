@@ -13,6 +13,18 @@ public class PlayerHand : CardPile
         this.cardCount = playerHandCards.Count;
     }
 
+    new public GameObject removeCard(GameObject cardToRemove) {
+        cards.Remove(cardToRemove);
+        --this.cardCount;
+        Debug.Log(cardToRemove + " removed from " + this);
+        return cardToRemove; 
+    }
+
+    new public void addCard(GameObject cardToAdd) {
+        cards.Add(cardToAdd);
+        ++cardCount;
+        Debug.Log(cardToAdd + " added to " + this);
+    }
 
     // public static void drawCard() {
     //     DrawPile.drawTopCard();
