@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Card", menuName = "Cards")]
+
 public class Card : MonoBehaviour
 {
-    [SerializeField] public new string name;
-    [SerializeField] public string description;
-    [SerializeField] public Sprite cardImage;
-    [SerializeField] public int cost;
-    [SerializeField] private GameObject _highlight;
-    [SerializeField] public GameObject _thisButton;
     public SelectionManager selectionManager;
-    public bool inDraw;
-    public bool inHand;
-    public bool inDiscard;
+    public PlayerCharacter PC;
     public bool isSelected = false;
     public int shuffleNumber;
+    public int cost = 1; //FIXME: something is fucking up with the cost comparison in SelectionManager
+
+    public int getCost() {
+        return this.cost;
+    }
 
     public void OnMouseDown(){
         isSelected = true;
@@ -24,12 +21,28 @@ public class Card : MonoBehaviour
         Debug.Log("Clicked on " + this);
     }
 
+    public void useCard(NPC selectedNPC) {
+        this.cardEffect(selectedNPC);
+        getPC();
+        PC.removeEnergy(this.cost);
+    }
+
     public void cardEffect(NPC selectedNPC){
         selectedNPC.takeDamage(1);
         //card effects
     }
 
-    public int Compare(Card otherCard) {
-        return this.shuffleNumber.CompareTo(otherCard.shuffleNumber);
+    public void getPC() {
+        if (!PC) {
+            GameObject PC_GO = GameObject.Find("PlayerCharacter");
+            PC = PC_GO.GetComponent<PlayerCharacter>(); 
+        }
+    }
+
+    public void Start() {
+        if (!PC) {
+            GameObject PC_GO = GameObject.Find("PlayerCharacter");
+            PC = PC_GO.GetComponent<PlayerCharacter>(); 
+        }
     }
 }

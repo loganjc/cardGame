@@ -8,6 +8,7 @@ public class NPC : MonoBehaviour
     private int maxHP;
     private int handLimit;
     private int defense;
+    public healthBar hpBar;
     public hpDisplay hpDisplayUI;
     public SelectionManager selectionManager;
 
@@ -23,11 +24,17 @@ public class NPC : MonoBehaviour
         Debug.Log("NPC took " + damage + " damage");
         HP -= damage;
         hpDisplayUI.updateHPcounter(this.HP);
+        hpBar.setHp(HP);
         Debug.Log("NPC has " + HP + " HP");
         if (HP <= 0){
-            Destroy(this);
-            Debug.Log("NPC has been destroyed");
+            death();
         }
+    }
+
+    public void death(){
+        this.gameObject.SetActive(false);
+        Destroy(this);
+            Debug.Log("NPC has been destroyed");
     }
 
     public void heal(int heal) {
@@ -35,6 +42,7 @@ public class NPC : MonoBehaviour
         if (HP > maxHP) {
             HP = maxHP;
         }
+        hpBar.setHp(HP);
     }
 
     public void addDefense(int defenseValue) {
@@ -52,7 +60,7 @@ public class NPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        hpBar.setMaxHp(HP);
     }
 
     // Update is called once per frame

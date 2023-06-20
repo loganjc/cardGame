@@ -7,28 +7,40 @@ public class PlayerHand : CardPile
     public DiscardPile discardPile;
     public DrawPile drawPile;
 
-    static List<Card> playerHandCards;
 
-    public void updateCardCount() {
-        this.cardCount = playerHandCards.Count;
-    }
-
-    new public GameObject removeCard(GameObject cardToRemove) {
+    new public GameObject removeCard(GameObject cardToRemove) { //FIXME: null reference exception on discard method in turnManager
+                                                                //its being passed a null value....
         cards.Remove(cardToRemove);
-        --this.cardCount;
+        --cardCount;
         Debug.Log(cardToRemove + " removed from " + this);
         return cardToRemove; 
     }
 
-    new public void addCard(GameObject cardToAdd) {
+    new public void addCard(GameObject cardToAdd) { //method without count display update
         cards.Add(cardToAdd);
         ++cardCount;
         Debug.Log(cardToAdd + " added to " + this);
     }
 
-    // public static void drawCard() {
-    //     DrawPile.drawTopCard();
-    // }
+
+    public void testDraw() {
+        drawTopCard();
+    }
+
+    new public GameObject drawTopCard() { //return top card if cards in list, otherwise return null
+        //Debug.Log("Player hand card count: " + cardCount);
+        if (cardCount == 0) {
+            Debug.Log("Player hand is empty!");
+            return null;
+        }
+        else {
+            //Debug.Log("pulling top card from player hand");
+            GameObject pulledCard =  cards[0];
+            removeCard(pulledCard);  
+            return pulledCard;
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
