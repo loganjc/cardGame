@@ -8,8 +8,7 @@ public class PlayerHand : CardPile
     public DrawPile drawPile;
 
 
-    new public GameObject removeCard(GameObject cardToRemove) { //FIXME: null reference exception on discard method in turnManager
-                                                                //its being passed a null value....
+    new public GameObject removeCard(GameObject cardToRemove) {
         cards.Remove(cardToRemove);
         --cardCount;
         Debug.Log(cardToRemove + " removed from " + this);
@@ -20,11 +19,6 @@ public class PlayerHand : CardPile
         cards.Add(cardToAdd);
         ++cardCount;
         Debug.Log(cardToAdd + " added to " + this);
-    }
-
-
-    public void testDraw() {
-        drawTopCard();
     }
 
     new public GameObject drawTopCard() { //return top card if cards in list, otherwise return null

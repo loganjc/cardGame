@@ -21,18 +21,18 @@ public class Card : MonoBehaviour
         Debug.Log("Clicked on " + this);
     }
 
-    public void useCard(NPC selectedNPC) {
+    public void useCard(Character selectedNPC) {
         this.cardEffect(selectedNPC);
         getPC();
         PC.removeEnergy(this.cost);
     }
 
-    public void cardEffect(NPC selectedNPC){
+    public void cardEffect(Character selectedNPC){
         selectedNPC.takeDamage(1);
         //card effects
     }
 
-    public void getPC() {
+    public void getPC() { //used in useCard() to find PC GO
         if (!PC) {
             GameObject PC_GO = GameObject.Find("PlayerCharacter");
             PC = PC_GO.GetComponent<PlayerCharacter>(); 
@@ -40,9 +40,6 @@ public class Card : MonoBehaviour
     }
 
     public void Start() {
-        if (!PC) {
-            GameObject PC_GO = GameObject.Find("PlayerCharacter");
-            PC = PC_GO.GetComponent<PlayerCharacter>(); 
-        }
+        getPC();
     }
 }

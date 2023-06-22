@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*THIS CLASS NO LONGER USED, METHOD INCLUDED IN TURN MANAGER  */
 public class drawCard : MonoBehaviour
 {
     public DrawPile drawPile;

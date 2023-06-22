@@ -34,6 +34,11 @@ public void endPCTurn() { //discard hand, Status effects, NPC turn
     //start NPC turn **
     startPCTurn();
 }
+
+public void startNPCTurn() {
+    
+}
+
 //--------------------------------------------------------------------------------------
 //Card Draw
 public void drawStartCards() { //draw 5 cards from draw --> hand
