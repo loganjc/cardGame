@@ -7,21 +7,21 @@ public class dragDrop : MonoBehaviour //this script goes on card objs to allow d
     public GameObject canvas;
     public GameObject playerHandArea;
     public SelectionManager selectionManager;
-    private bool isDragging = false;
-    private bool isOverDropZone = false;
-    private GameObject dropZone;
-    private GameObject startParent;
-    private Vector2 startPosition;
-    private GameObject card;
+    public bool isDragging = false;
+    public bool isOverDropZone = false;
+    public GameObject dropZone;
+    public GameObject startParent;
+    public Vector2 startPosition;
+    public GameObject card;
     
-    private void Awake() { //get refs
+    public virtual void Awake() { //get refs
         canvas = GameObject.Find("playmatCanvas");
         selectionManager = GameObject.Find("SelectionManager").GetComponent<SelectionManager>();
         playerHandArea = GameObject.Find("playerHandArea");
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update() //updates card.position to match mouse.position when dragging cards
     {
         if(isDragging) {
             transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y); //moves card to mouse position
@@ -30,24 +30,24 @@ public class dragDrop : MonoBehaviour //this script goes on card objs to allow d
             selectionManager.cardSelect(card);
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision) { //establishes drop zone as collision object
+//----------------------------------------------------
+//Collision
+    public void OnCollisionEnter2D(Collision2D collision) { //establishes drop zone as collision object
         isOverDropZone = true;
         dropZone = collision.gameObject;
     }
 
-    private void OnCollisionExit2D(Collision2D collision) { //removes drop zone as collision object
+    public void OnCollisionExit2D(Collision2D collision) { //removes drop zone as collision object
         isOverDropZone = false;
     }
 
     public void startDrag() {
         startPosition = transform.position;
         // startParent = transform.parent.gameObject;
-        
         isDragging = true;
     }
 
-    public void endDrag() { //applies card to NPC/ PC via selection Manager
+    public virtual void endDrag() { //applies card to NPC/ PC via selection Manager
         isDragging = false;
         if (isOverDropZone && dropZone.GetComponent<Character>() != null){ 
             selectionManager.useCard(dropZone.GetComponent<Character>());

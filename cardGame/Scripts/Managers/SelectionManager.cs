@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/* Responsible for selecting cards in hand, applying cards to NPC
+/* Responsible for selecting cards in hand, applying cards to characters
+    Selection manager 
     FIXME: needs to be able to apply to PC
-    FIXME: add drag + drop behavior */
+*/
 public class SelectionManager : MonoBehaviour
 {
     public static bool hasCard = false;
@@ -16,16 +17,34 @@ public class SelectionManager : MonoBehaviour
     public DiscardPile discardPile;
     public GameObject hand;
     public PlayerHand playerHand;
+    public List<NPC> NPCs = new List<NPC>();
 
     //----------------------------------------------------------------
+    //Manager methods
     public bool getHasCard() {
         return hasCard;
     }
-    public void cardSelect(GameObject playerCard) { //
+    public void cardSelect(GameObject playerCard) { //method stores clicked on card for clicking card application method
         selectedCard = playerCard;
         hasCard = true;
     }
-    public void useCard(Character target) { //applies card to NPC, sends card from hand --> discard pile
+
+    //-------------------------------------------------------------------
+    //Card effect application methods
+
+    // public void useCard() { //this method will help to apply correct card effects to the right targets
+    //     selectedCardCardClass = selectedCard.GetComponent<Card>();
+    //     if (selectedCardCardClass.isAOE) {
+    //         applyAOE();
+    //     }
+    //     else if (selectedCardCardClass.targetsPC) {
+    //         applyToPC();
+    //     }
+    //     else {
+    //         applySingleTarget();
+    //     }
+    // }
+    public void useCard(Character target) { //applies card to single NPC, sends card from hand --> discard pile
         getObjRefs();
         selectedCardCardClass = selectedCard.GetComponent<Card>();
         if (PC.getEnergy() >= selectedCardCardClass.cost) {
@@ -45,6 +64,34 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
+    public void applyAOE() { //applies card to ALL npcs, sends card from hand --> discard pile
+        getObjRefs();
+        selectedCardCardClass = selectedCard.GetComponent<Card>();
+        if (PC.getEnergy() >= selectedCardCardClass.cost) {
+            for(int i = 0; i < NPCs.Count; ++i) {
+                selectedCardCardClass.useCard(NPCs[i]); //FIXME: this is causing PC energy to go negative
+            }
+            discardPile.addCard(selectedCard.gameObject);
+            playerHand.removeCard(selectedCard);
+            selectedCard.SetActive(false);
+            selectedCard.transform.SetParent(null, false);
+            selectedCard.transform.position = new Vector2(-100, -100);
+            selectedCard = null;
+            hasCard = false;
+        }
+        else {
+            Debug.Log("You don't have enough energy to play " + selectedCard);
+            selectedCard = null;
+            hasCard = false;
+        }
+    }
+
+    public void applyToPC() {
+
+    }
+
+//----------------------------------------------------------
+//Setup methods
     public void getObjRefs() { //this is to try and fix null object exceptions...
         if (!discard) {
             discard = GameObject.Find("discardPile");
@@ -64,6 +111,13 @@ public class SelectionManager : MonoBehaviour
         if (!PC) {
             PC = PC_gameObj.GetComponent<PlayerCharacter>();
         }
+    }
+
+    public void addNPC(NPC npc) { //this method supports NPC class start() method to add NPC ref to this obj's list
+    NPCs.Add(npc);
+    }
+    public void removeNPC(NPC npc) {
+        NPCs.Remove(npc);
     }
 
     public void Start() {

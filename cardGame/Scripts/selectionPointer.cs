@@ -16,8 +16,16 @@ public class selectionPointer : MonoBehaviour
     }
 
     public void onMouseDrag() {
-        
+        setAnchor(this.GetComponent<GameObject>());
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
 
+        Vector3 direction = mousePosition - anchorPos.position;
+        direction.Normalize();
+
+        GameObject arrow = Instantiate(arrowPrefab, anchorPos.position, Quaternion.identity);
+        Rigidbody2D arrowRigidbody = arrow.GetComponent<Rigidbody2D>();
+        arrowRigidbody.velocity = direction * arrowSpeed;
     }
    
 

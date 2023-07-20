@@ -9,7 +9,7 @@ public class CardPile : MonoBehaviour
     public bool isEmpty;
     public countDisplay cardCountDisplay;
 
-    public GameObject removeCard(GameObject cardToRemove) { 
+    public GameObject removeCard(GameObject cardToRemove) { // this method is used to remove cards from card piles
         cards.Remove(cardToRemove);
         --this.cardCount;
         if (cardCount == 0) {
@@ -20,7 +20,7 @@ public class CardPile : MonoBehaviour
         return cardToRemove; 
     }
 
-    public void addCard(GameObject cardToAdd) {
+    public void addCard(GameObject cardToAdd) { //this method is used to transfer cards between piles
         cards.Add(cardToAdd);
         ++cardCount;
         isEmpty = false;
@@ -33,13 +33,13 @@ public class CardPile : MonoBehaviour
         cards.Add(newCard);
     }
 
-    public List<GameObject> copyCards() {
+    public List<GameObject> copyCards() { //returns a copy of the cards currently in the card pile
         List<GameObject> copy = new List<GameObject>(cards);
         return copy;
     }
 
 
-    public GameObject drawTopCard() { //return top card if cards in list, otherwise return null
+    public GameObject drawTopCard() { //return top card of cards in cards array + remove from array, otherwise return null
         if (this.cardCount == 0) {
             Debug.Log(this + " is empty!");
             return null;

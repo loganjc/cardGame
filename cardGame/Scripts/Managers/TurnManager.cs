@@ -17,6 +17,7 @@ private List<NPC> NPCs = new List<NPC>();
 public void startCombat() { //Inits piles and hand
     //spawn enemies?? **
     drawPile.buildDrawPile();
+    drawPile.shuffle();
     drawStartCards();
 }
 
@@ -43,17 +44,19 @@ public void endPCTurn() { //discard hand, Status effects, NPC turn
 //--------------------------------------------------------------------------------------
 //Card Draw
 public void drawStartCards() { //draw 5 cards from draw --> hand
-        for (var i = 0; i < 5; ++i) {
+        for (int i = 0; i < 5; ++i) {
             drawCard();
         }
     }
 public void drawCard() { //draw a single card from draw --> hand
+    Debug.Log(drawPile.cardCount);
     if (drawPile.cardCount == 0) {
+        Debug.Log(" draw pile is empy, performing discard to draw");
         discardToDraw();
     }
     GameObject playerCard = drawPile.drawTopCard();  
-    playerCard.transform.SetParent(playerHandGO.transform, false);
     playerCard.SetActive(true);
+    playerCard.transform.SetParent(playerHandGO.transform, false);
     playerHand.addCard(playerCard);
     drawPile.cardCountDisplay.updateCardCountDisplay();
 }
@@ -62,15 +65,15 @@ public void drawCard() { //draw a single card from draw --> hand
 public void discardToDraw() { //send cards from discard --> draw + shuffle draw
     while (discardPile.cardCount > 0) {
         GameObject topcard = discardPile.drawTopCard();
-        topcard.SetActive(true);
+        //topcard.SetActive(true);
         drawPile.addCard(topcard);
+        topcard = null;
     }
     drawPile.shuffle();
 }
 
 public void discardOneCard() {
-    GameObject selectedCard = playerHand.drawTopCard(); //FIXME: the null reference exception is here, it does not print log msgs, 
-                                                        //does remove a card from hand though.... 
+    GameObject selectedCard = playerHand.drawTopCard();
     discardPile.addCard(selectedCard);
     selectedCard.SetActive(false);
     selectedCard.transform.SetParent(null, false);
@@ -96,7 +99,7 @@ public void getObjRefs() { //grab needed GO references from unity scene
     PC = PC_GO.GetComponent<PlayerCharacter>();
 }
 
-public void addNPC(NPC npc) {
+public void addNPC(NPC npc) { //this method supports NPC class start() method to add NPC ref to this obj's list
     NPCs.Add(npc);
 }
 public void removeNPC(NPC npc) {

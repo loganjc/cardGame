@@ -25,6 +25,7 @@ public class Character : MonoBehaviour
         if ( damage > 0) {
             HP = HP - damage;
         }
+        hpBar.updateDefense(defense);
         hpBar.setHp(HP);
         Debug.Log(this + " has " + HP + " HP");
         if (HP <= 0){
@@ -69,11 +70,14 @@ public class Character : MonoBehaviour
 //------------------------------------------------------
     //Defense Methods
     public void addDefense(int defenseValue) {
-        defense = defense + defenseValue;
+        this.defense = this.defense + defenseValue;
+        hpBar.updateDefense(defense);
+        Debug.Log(this + " added defense");
     }
 
     public void resetDefense() {
         defense = 0;
+        hpBar.updateDefense(defense);
     }
 
     // Start is called before the first frame update

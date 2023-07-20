@@ -8,6 +8,8 @@ public class Card : MonoBehaviour
     public SelectionManager selectionManager;
     public PlayerCharacter PC;
     public bool isSelected = false;
+    public bool isAOE = false;
+    public bool targetsPC = false;
     public int shuffleNumber;
     public int cost = 1; //FIXME: something is fucking up with the cost comparison in SelectionManager
 
@@ -21,6 +23,8 @@ public class Card : MonoBehaviour
         //Debug.Log("Clicked on " + this);
     }
 
+//-----------------------------------------------------------------
+//Card effects methods
     public void useCard(Character selectedCharacter) {
         if (selectedCharacter.GetComponent<NPC>() != null) { //apply NPC effet
             this.cardEffect(selectedCharacter.GetComponent<NPC>());
@@ -45,6 +49,8 @@ public class Card : MonoBehaviour
         return false;
     }
 
+//------------------------------------------------------------------
+//Setup methods
     public void getPC() { //used in useCard() to find PC GO
         if (!PC) {
             GameObject PC_GO = GameObject.Find("PlayerCharacter");

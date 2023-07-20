@@ -233,6 +233,8 @@ MonoBehaviour:
   selectionManager: {fileID: 0}
   PC: {fileID: 0}
   isSelected: 0
+  isAOE: 0
+  targetsPC: 0
   shuffleNumber: 0
   cost: 1
   damage: 1
