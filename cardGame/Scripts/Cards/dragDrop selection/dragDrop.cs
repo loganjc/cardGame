@@ -21,7 +21,7 @@ public class dragDrop : MonoBehaviour //this script goes on card objs to allow d
     }
 
     // Update is called once per frame
-    public void Update() //updates card.position to match mouse.position when dragging cards
+    public virtual void Update() //updates card.position to match mouse.position when dragging cards
     {
         if(isDragging) {
             transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y); //moves card to mouse position

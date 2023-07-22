@@ -10,14 +10,15 @@ public class SelectionManager : MonoBehaviour
 {
     public static bool hasCard = false;
     public GameObject selectedCard;
-    private Card selectedCardCardClass; 
     public GameObject PC_gameObj;
-    public PlayerCharacter PC;
     public GameObject discard;
-    public DiscardPile discardPile;
     public GameObject hand;
+    private Card selectedCardCardClass; 
+    public PlayerCharacter PC;
+    public DiscardPile discardPile;
     public PlayerHand playerHand;
-    public List<NPC> NPCs = new List<NPC>();
+    public TurnManager TM;
+    public List<NPC> NPCs;
 
     //----------------------------------------------------------------
     //Manager methods
@@ -30,20 +31,9 @@ public class SelectionManager : MonoBehaviour
     }
 
     //-------------------------------------------------------------------
-    //Card effect application methods
-
-    // public void useCard() { //this method will help to apply correct card effects to the right targets
-    //     selectedCardCardClass = selectedCard.GetComponent<Card>();
-    //     if (selectedCardCardClass.isAOE) {
-    //         applyAOE();
-    //     }
-    //     else if (selectedCardCardClass.targetsPC) {
-    //         applyToPC();
-    //     }
-    //     else {
-    //         applySingleTarget();
-    //     }
-    // }
+    //Card effect application methods:
+    //  These methods apply cards to various targets based on card targeting scheme: single target, AOE, self, etc.
+    //  Methods are called by the associated dragdrop methods present on card gameobjects.
     public void useCard(Character target) { //applies card to single NPC, sends card from hand --> discard pile
         getObjRefs();
         selectedCardCardClass = selectedCard.GetComponent<Card>();
@@ -66,6 +56,7 @@ public class SelectionManager : MonoBehaviour
 
     public void applyAOE() { //applies card to ALL npcs, sends card from hand --> discard pile
         getObjRefs();
+        NPCs = TM.getNPCs();
         selectedCardCardClass = selectedCard.GetComponent<Card>();
         if (PC.getEnergy() >= selectedCardCardClass.cost) {
             for(int i = 0; i < NPCs.Count; ++i) {
@@ -113,14 +104,7 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
-    public void addNPC(NPC npc) { //this method supports NPC class start() method to add NPC ref to this obj's list
-    NPCs.Add(npc);
-    }
-    public void removeNPC(NPC npc) {
-        NPCs.Remove(npc);
-    }
-
-    public void Start() {
-        
+    public void Awake() {
+        TM = GameObject.Find("turnManager").GetComponent<TurnManager>();
     }
 }

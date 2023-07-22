@@ -52,8 +52,6 @@ public class NPC : Character
     {
         TM = GameObject.Find("turnManager").GetComponent<TurnManager>();
         TM.addNPC(this);
-        SM = GameObject.Find("SelectionManager").GetComponent<SelectionManager>();
-        SM.addNPC(this);
         PC = GameObject.Find("PlayerCharacter").GetComponent<PlayerCharacter>();
         hpBar.setMaxHp(HP);
     }

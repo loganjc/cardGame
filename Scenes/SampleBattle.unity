@@ -1169,9 +1169,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "To Do List:\n\nFIXME: Get the AOE drag drop collisions to not be so weird,
-    playing\ncards in general is sort of fucked\n\nDeck card array elements must
-    be unique card game objects\n\nAdd: Selection Pointer Arrow Thing\n\nGame Flow:\n\t-Options
+  m_text: "To Do List:\nFIXME: The aoe card takes away PC energy equal to cost*numberNPCs,
+    should only subtract cost one time.\n\nDeck card array elements must be unique
+    card game objects\n\nAdd: Selection Pointer Arrow Thing\n\n\nGame Flow:\n\t-Options
     bar/ menu\n\t\t-exit game, save game, etc\n\t-victory screen\n\nUI elements: 
     turn count\n\t-UI does not scale to camera/ scene dimensions\n\nAdd PC elements;\n\t-Hand
     limit??? \n\t-game over at 0 hp\n\nAdd NPC features:\n\t-NPCs perform moves on
@@ -1790,7 +1790,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2, y: 69.270485}
+  m_AnchoredPosition: {x: 5, y: 78.007}
   m_SizeDelta: {x: 1000, y: 310}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &1203421149
@@ -1860,7 +1860,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!1 &1286147811 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 48742208446133179, guid: 56854f4337dea2f488f900a550e9eb63, type: 3}
@@ -3271,11 +3271,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2573459957731596769, guid: d71425e2b702fa24c90516626a38933d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.1327
+      value: 0.0000095665
       objectReference: {fileID: 0}
     - target: {fileID: 2573459957731596769, guid: d71425e2b702fa24c90516626a38933d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -169
+      value: -174
       objectReference: {fileID: 0}
     - target: {fileID: 2573459957731596769, guid: d71425e2b702fa24c90516626a38933d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

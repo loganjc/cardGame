@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5884835745873616159}
   - component: {fileID: 5851216221208255444}
   - component: {fileID: 8141100477747897657}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: card2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,6 +171,12 @@ MonoBehaviour:
   canvas: {fileID: 0}
   playerHandArea: {fileID: 0}
   selectionManager: {fileID: 0}
+  isDragging: 0
+  isOverDropZone: 0
+  dropZone: {fileID: 0}
+  startParent: {fileID: 0}
+  startPosition: {x: 0, y: 0}
+  card: {fileID: 0}
 --- !u!61 &5884835745873616159
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -238,4 +244,3 @@ MonoBehaviour:
   shuffleNumber: 0
   cost: 1
   damage: 1
-  isAttack: 1

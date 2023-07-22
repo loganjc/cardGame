@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+The Turn Manager does a lot of important functions!:
+    Controls initalization of PC piles and hand.
+    Controls PC drawing of cards to hand and discarding of cards @ end of turn.
+    Resets PC attributes such as energy and defense.
+    Triggers NPC turns/ attacks.
+    Keeps track of NPCs in the current battle.
+*/
 public class TurnManager : MonoBehaviour
 {
 public static Deck playerDeck;
@@ -99,11 +107,16 @@ public void getObjRefs() { //grab needed GO references from unity scene
     PC = PC_GO.GetComponent<PlayerCharacter>();
 }
 
+//----------------------------------------------------------------
+//NPC methods
 public void addNPC(NPC npc) { //this method supports NPC class start() method to add NPC ref to this obj's list
     NPCs.Add(npc);
 }
 public void removeNPC(NPC npc) {
     NPCs.Remove(npc);
+}
+public List<NPC> getNPCs(){
+    return NPCs;
 }
 
 //-------------------------------------------------------------
