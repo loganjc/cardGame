@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/* Responsible for selecting cards in hand, applying cards to characters
-    Selection manager 
-    FIXME: needs to be able to apply to PC
+/* 
+Responsible for selecting cards in hand, applying cards to characters
 */
 public class SelectionManager : MonoBehaviour
 {
@@ -21,7 +20,7 @@ public class SelectionManager : MonoBehaviour
     public List<NPC> NPCs;
 
     //----------------------------------------------------------------
-    //Manager methods
+    //Manager methods: Used in the various useCard methods in next section.
     public bool getHasCard() {
         return hasCard;
     }
@@ -34,7 +33,7 @@ public class SelectionManager : MonoBehaviour
     //Card effect application methods:
     //  These methods apply cards to various targets based on card targeting scheme: single target, AOE, self, etc.
     //  Methods are called by the associated dragdrop methods present on card gameobjects.
-    public void useCard(Character target) { //applies card to single NPC, sends card from hand --> discard pile
+    public void useCard(Character target) { //applies card to single target either NPC or PC, sends card from hand --> discard pile
         getObjRefs();
         selectedCardCardClass = selectedCard.GetComponent<Card>();
         if (PC.getEnergy() >= selectedCardCardClass.cost) {
@@ -43,7 +42,7 @@ public class SelectionManager : MonoBehaviour
             playerHand.removeCard(selectedCard);
             selectedCard.SetActive(false);
             selectedCard.transform.SetParent(null, false);
-            selectedCard.transform.position = new Vector2(-100, -100);
+            selectedCard.transform.position = new Vector2(-100, -100); //get card offscreen
             selectedCard = null;
             hasCard = false;
         }
@@ -61,12 +60,15 @@ public class SelectionManager : MonoBehaviour
         if (PC.getEnergy() >= selectedCardCardClass.cost) {
             for(int i = 0; i < NPCs.Count; ++i) {
                 selectedCardCardClass.useCard(NPCs[i]); //FIXME: this is causing PC energy to go negative
+                if(i > 0){
+                    PC.addEnergy(selectedCardCardClass.cost);
+                }
             }
             discardPile.addCard(selectedCard.gameObject);
             playerHand.removeCard(selectedCard);
             selectedCard.SetActive(false);
             selectedCard.transform.SetParent(null, false);
-            selectedCard.transform.position = new Vector2(-100, -100);
+            selectedCard.transform.position = new Vector2(-100, -100); 
             selectedCard = null;
             hasCard = false;
         }
@@ -76,11 +78,6 @@ public class SelectionManager : MonoBehaviour
             hasCard = false;
         }
     }
-
-    public void applyToPC() {
-
-    }
-
 //----------------------------------------------------------
 //Setup methods
     public void getObjRefs() { //this is to try and fix null object exceptions...
