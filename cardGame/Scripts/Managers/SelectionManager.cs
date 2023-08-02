@@ -59,7 +59,7 @@ public class SelectionManager : MonoBehaviour
         selectedCardCardClass = selectedCard.GetComponent<Card>();
         if (PC.getEnergy() >= selectedCardCardClass.cost) {
             for(int i = 0; i < NPCs.Count; ++i) {
-                selectedCardCardClass.useCard(NPCs[i]); //FIXME: this is causing PC energy to go negative
+                selectedCardCardClass.useCard(NPCs[i]); 
                 if(i > 0){
                     PC.addEnergy(selectedCardCardClass.cost);
                 }

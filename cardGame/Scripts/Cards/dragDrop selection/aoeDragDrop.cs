@@ -2,11 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+Child class of dragDrop for cards that target all NPC game objects.
+*/
 public class aoeDragDrop : dragDrop
 {
-
     private GameObject playCardArea;
 
+    public override void Awake() { //Finds the play card area to be recognized as drop zone.
+        playCardArea = GameObject.Find("playCardArea");
+        canvas = GameObject.Find("playmatCanvas");
+        selectionManager = GameObject.Find("SelectionManager").GetComponent<SelectionManager>();
+        playerHandArea = GameObject.Find("playerHandArea");
+    }
+//----------------------------------------------------
+//Collision
     new private void OnCollisionEnter2D(Collision2D collision) { //establishes drop zone as collision object
         dropZone = collision.gameObject;
         Debug.Log("dropzone collision is " + dropZone);
@@ -14,11 +24,7 @@ public class aoeDragDrop : dragDrop
             isOverDropZone = true;
         }
     }
-    new private void OnCollisionExit2D(Collision2D collision) { //removes drop zone as collision object
-        isOverDropZone = false;
-        Debug.Log("exited drop zone collision");
-    }
-    public override void endDrag() { //applies AOE card to all NPCs via selection Manager 
+    public override void endDrag() { //applies AOE card to all NPCs via applyAOE() selection Manager method. 
         isDragging = false;
         if (isOverDropZone){ 
             selectionManager.applyAOE();
@@ -35,11 +41,5 @@ public class aoeDragDrop : dragDrop
             transform.SetParent(playerHandArea.transform, false);
             Debug.Log("Did not play card " + card);
         }
-    }
-    public override void Awake() {
-        playCardArea = GameObject.Find("playCardArea");
-        canvas = GameObject.Find("playmatCanvas");
-        selectionManager = GameObject.Find("SelectionManager").GetComponent<SelectionManager>();
-        playerHandArea = GameObject.Find("playerHandArea");
     }
 }

@@ -9,8 +9,10 @@ public class Card : MonoBehaviour
     public PlayerCharacter PC;
     public bool isSelected = false;
     public int shuffleNumber;
-    public int cost = 1; //FIXME: something is fucking up with the cost comparison in SelectionManager
+    public int cost = 1;
 
+//-----------------------------------------------------------------
+//Card misc methods
     public int getCost() {
         return this.cost;
     }

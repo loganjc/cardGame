@@ -13,12 +13,11 @@ GameObject:
   - component: {fileID: 4853784751471545956}
   - component: {fileID: 7157377121317037598}
   - component: {fileID: 8701870441680454351}
-  - component: {fileID: -1387754074811572343}
   - component: {fileID: 5884835745873616159}
   - component: {fileID: 5851216221208255444}
-  - component: {fileID: 8141100477747897657}
+  - component: {fileID: -3475551227313437696}
   m_Layer: 9
-  m_Name: card2
+  m_Name: testCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +71,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c983641ff88cd9045935b5fff44dba42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fbf4ab05b757ddc44a5456f26fcf7f10, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -115,7 +114,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: -1387754074811572343}
+        - m_Target: {fileID: -3475551227313437696}
           m_TargetAssemblyTypeName: dragDrop, Assembly-CSharp
           m_MethodName: startDrag
           m_Mode: 1
@@ -131,7 +130,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: -1387754074811572343}
+        - m_Target: {fileID: -3475551227313437696}
           m_TargetAssemblyTypeName: dragDrop, Assembly-CSharp
           m_MethodName: endDrag
           m_Mode: 1
@@ -156,27 +155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
---- !u!114 &-1387754074811572343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5434674386228299279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de3a3a20eb7a09a42b3a4c919b25a0fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  playerHandArea: {fileID: 0}
-  selectionManager: {fileID: 0}
-  isDragging: 0
-  isOverDropZone: 0
-  dropZone: {fileID: 0}
-  startParent: {fileID: 0}
-  startPosition: {x: 0, y: 0}
-  card: {fileID: 0}
 --- !u!61 &5884835745873616159
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -224,7 +202,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
---- !u!114 &8141100477747897657
+--- !u!114 &-3475551227313437696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,14 +211,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5434674386228299279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e68be3712324a74bbd1676393213ea3, type: 3}
+  m_Script: {fileID: 11500000, guid: de3a3a20eb7a09a42b3a4c919b25a0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  playerHandArea: {fileID: 0}
   selectionManager: {fileID: 0}
-  PC: {fileID: 0}
-  isSelected: 0
-  isAOE: 0
-  targetsPC: 0
-  shuffleNumber: 0
-  cost: 1
-  damage: 1
+  isDragging: 0
+  isOverDropZone: 0
+  dropZone: {fileID: 0}
+  startParent: {fileID: 0}
+  startPosition: {x: 0, y: 0}
+  card: {fileID: 0}

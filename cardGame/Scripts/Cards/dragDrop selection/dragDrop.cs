@@ -2,7 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class dragDrop : MonoBehaviour //this script goes on card objs to allow drag and drop behavior
+/*
+DragDrop is very important!!!
+---------------------------------------------
+This is the parent class for all other dragDrop classes: aoeDragDrop, npcDragDrop, & pcDragDrop
+Child classes override the OnCollisionEnter() & endDrag() methods to limit drop zone to specific GameObject types and
+to call the appropriate SelectionManager card application method.
+*/
+public class dragDrop : MonoBehaviour
 {
     public GameObject canvas;
     public GameObject playerHandArea;
@@ -14,14 +21,18 @@ public class dragDrop : MonoBehaviour //this script goes on card objs to allow d
     public Vector2 startPosition;
     public GameObject card;
     
-    public virtual void Awake() { //get refs
+//----------------------------------------------------
+//Setup Methods - get GO references for class to work. 
+    public virtual void Awake() { //get refs, overridden in some child classes.
         canvas = GameObject.Find("playmatCanvas");
         selectionManager = GameObject.Find("SelectionManager").GetComponent<SelectionManager>();
         playerHandArea = GameObject.Find("playerHandArea");
     }
 
+//----------------------------------------------------
+//Update - Actually causes the card to move onscreen with the mouse position.
     // Update is called once per frame
-    public virtual void Update() //updates card.position to match mouse.position when dragging cards
+    public void Update() //updates card.position to match mouse.position when dragging cards
     {
         if(isDragging) {
             transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y); //moves card to mouse position
@@ -31,7 +42,7 @@ public class dragDrop : MonoBehaviour //this script goes on card objs to allow d
         }
     }
 //----------------------------------------------------
-//Collision
+//Collision Methods - tells class when it has an object to apply a card to.
     public void OnCollisionEnter2D(Collision2D collision) { //establishes drop zone as collision object
         isOverDropZone = true;
         dropZone = collision.gameObject;
@@ -40,10 +51,10 @@ public class dragDrop : MonoBehaviour //this script goes on card objs to allow d
     public void OnCollisionExit2D(Collision2D collision) { //removes drop zone as collision object
         isOverDropZone = false;
     }
-
+//----------------------------------------------------
+//Start & Stop Methods - begin and end card drag process.
     public void startDrag() {
         startPosition = transform.position;
-        // startParent = transform.parent.gameObject;
         isDragging = true;
     }
 

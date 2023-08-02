@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5460330086713701812
+--- !u!1001 &3794533145009564217
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -94,19 +94,19 @@ PrefabInstance:
     - target: {fileID: 4853784751471545956, guid: 893f801e15563db46b074340c5bbc92a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7d18f16a3ab11b34b80f31fdd80c95ce, type: 3}
+      objectReference: {fileID: 21300000, guid: c983641ff88cd9045935b5fff44dba42, type: 3}
     - target: {fileID: 5434674386228299279, guid: 893f801e15563db46b074340c5bbc92a, type: 3}
       propertyPath: m_Name
-      value: defendCard
+      value: attackCard
       objectReference: {fileID: 0}
     - target: {fileID: 7157377121317037598, guid: 893f801e15563db46b074340c5bbc92a, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7210167769198560654}
+      objectReference: {fileID: 1175712068297562186}
     - target: {fileID: 7157377121317037598, guid: 893f801e15563db46b074340c5bbc92a, type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7210167769198560654}
+      objectReference: {fileID: 1175712068297562186}
     - target: {fileID: 7157377121317037598, guid: 893f801e15563db46b074340c5bbc92a, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: startDrag
@@ -118,21 +118,21 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: -3475551227313437696, guid: 893f801e15563db46b074340c5bbc92a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 893f801e15563db46b074340c5bbc92a, type: 3}
---- !u!1 &48742208446133179 stripped
+--- !u!1 &9206259538019281974 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5434674386228299279, guid: 893f801e15563db46b074340c5bbc92a, type: 3}
-  m_PrefabInstance: {fileID: 5460330086713701812}
+  m_PrefabInstance: {fileID: 3794533145009564217}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6660564574023251521
+--- !u!114 &-6138681399856294137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48742208446133179}
+  m_GameObject: {fileID: 9206259538019281974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1612a7901dab24c418bb448564e0aa44, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e68be3712324a74bbd1676393213ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selectionManager: {fileID: 0}
@@ -140,17 +140,17 @@ MonoBehaviour:
   isSelected: 0
   shuffleNumber: 0
   cost: 1
-  defense: 3
---- !u!114 &7210167769198560654
+  damage: 1
+--- !u!114 &1175712068297562186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48742208446133179}
+  m_GameObject: {fileID: 9206259538019281974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8877166a5d1da41ac0b608cd98949b, type: 3}
+  m_Script: {fileID: 11500000, guid: d59249dc70b64c448a8f4e9c5042062f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
